@@ -6,6 +6,8 @@ from nltk.corpus import treebank
 from nltk.tag import RegexpTagger
 
 save_name = sys.argv[1]
+
+# Taken from nltk documentation
 tag = RegexpTagger([
     (r'^-?[0-9]+(.[0-9]+)?$', 'CD'),   # cardinal numbers
     (r'(The|the|A|a|An|an)$', 'AT'),   # articles
@@ -17,7 +19,9 @@ tag = RegexpTagger([
     (r'.*ed$', 'VBD'),                 # past tense verbs
     (r'.*', 'NN')                      # nouns (default)
 ])
-templates = [
+
+# Taken from https://www.tutorialspoint.com/natural_language_toolkit/more_natural_language_toolkit_taggers.htm
+templates_tutorialspoint = [
    brill.Template(brill.Pos([-1])),
    brill.Template(brill.Pos([1])),
    brill.Template(brill.Pos([-2])),
@@ -37,7 +41,7 @@ templates = [
    brill.Template(brill.Word([1, 2, 3])),
    brill.Template(brill.Word([-1]), brill.Word([1])),
 ]
-trainer = BrillTaggerTrainer(tag, templates)
+trainer = BrillTaggerTrainer(tag, templates_tutorialspoint)
 
 train_data = treebank.tagged_sents()[:3000]
 brill_tagger = trainer.train(train_data)
