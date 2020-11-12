@@ -19,7 +19,7 @@ def window(tokens: List[str], idx:int) -> List[str]:
 
     return token_of_interest
 
-ct = CRFTagger(feature_func=window)
+ct = CRFTagger()
 
 
 train_data = treebank.tagged_sents()[:3000]
