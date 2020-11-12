@@ -13,9 +13,9 @@ def window(tokens: List[str], idx:int) -> List[str]:
     token_of_interest = dummy_tagger._feature_func(tokens, idx)
 
     # get previous token
-    if idx > 0:
-        previous_token = dummy_tagger._feature_func(tokens, idx-1)
-        token_of_interest.extend([f"PREVIOUS_{feature}" for feature in previous_token])
+    if idx < len(tokens) - 1:
+        previous_token = dummy_tagger._feature_func(tokens, idx+1)
+        token_of_interest.extend([f"NEXT_{feature}" for feature in previous_token])
 
     return token_of_interest
 
