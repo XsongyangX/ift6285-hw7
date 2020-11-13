@@ -1,7 +1,9 @@
 import sys
+from nltk.tag.brill import brill24
 import spacy
 from nltk.tag import TaggerI
 from nltk.corpus import treebank
+from nltk.tag.brill_trainer import BrillTaggerTrainer, brill_trainer
 
 class SpacyTagger(TaggerI):
     
@@ -29,9 +31,12 @@ class SpacyTagger(TaggerI):
         # now doc is ready:
         return [(t.text, t.tag_) for t in doc]
 
-# save_name = sys.argv[1]
+save_name = sys.argv[1]
 
-data = treebank.tagged_sents()[3000:]
+train_data = treebank.tagged_sents()[:3000]
+test_data = treebank.tagged_sents()[3000:]
 
 sp_tagger = SpacyTagger()
-print(sp_tagger.evaluate(data))
+trainer = BrillTaggerTrainer(sp_tagger, brill24())
+tagger = trainer.train(train_data)
+print(tagger.evaluate(test_data))
