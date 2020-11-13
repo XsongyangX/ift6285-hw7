@@ -3,7 +3,7 @@ from nltk.tag.brill import brill24
 import spacy
 from nltk.tag import TaggerI
 from nltk.corpus import treebank
-from nltk.tag.brill_trainer import BrillTaggerTrainer, brill_trainer
+from nltk.tag.brill_trainer import BrillTaggerTrainer
 
 class SpacyTagger(TaggerI):
     
