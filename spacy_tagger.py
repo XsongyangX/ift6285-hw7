@@ -44,7 +44,7 @@ recursive_tagger : BrillTagger = None
 Template._cleartemplates()
 templates = brill24()
 
-for i in range(sys.argv[1]):
+for i in range(int(sys.argv[1])):
   if i == 0:
     trainer = BrillTaggerTrainer(SpacyTagger(), templates)
   else:
