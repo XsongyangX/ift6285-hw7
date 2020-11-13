@@ -1,0 +1,11 @@
+Initial tagger: default CRF
+Templates: Brill24
+Iteration 1, time elapsed: 26.354327917099
+Train score: 0.9671272464553419
+Test score: 0.951090006475286
+Iteration 2, time elapsed: 58.6883807182312
+Train score: 0.9714492136599966
+Test score: 0.9515648607813512
+Iteration 3, time elapsed: 86.33444309234619
+Train score: 0.9714492136599966
+Test score: 0.9515648607813512
