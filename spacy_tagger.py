@@ -1,9 +1,11 @@
 import sys
-from nltk.tag.brill import brill24
+from nltk.tag.brill import BrillTagger, brill, brill24
 import spacy
 from nltk.tag import TaggerI
 from nltk.corpus import treebank
 from nltk.tag.brill_trainer import BrillTaggerTrainer
+import time
+start_time = time.time()
 
 class SpacyTagger(TaggerI):
     
@@ -36,7 +38,18 @@ class SpacyTagger(TaggerI):
 train_data = treebank.tagged_sents()[:3000]
 test_data = treebank.tagged_sents()[3000:]
 
-sp_tagger = SpacyTagger()
-trainer = BrillTaggerTrainer(sp_tagger, brill24())
-tagger = trainer.train(train_data)
-print(tagger.evaluate(test_data))
+recursive_tagger : BrillTagger = None
+
+# Clean up templates
+brill.Template._cleartemplates()
+templates = brill24()
+
+for i in range(sys.argv[1]):
+  if i == 0:
+    trainer = BrillTaggerTrainer(SpacyTagger(), templates)
+  else:
+    trainer = BrillTaggerTrainer(recursive_tagger, templates)
+  recursive_tagger = trainer.train(train_data)
+  print(f"Iteration {i+1}, time elapsed: {time.time() - start_time}")
+  print(f"Train score: {recursive_tagger.evaluate(train_data)}")
+  print(f"Test score: {recursive_tagger.evaluate(test_data)}")
