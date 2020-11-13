@@ -31,7 +31,7 @@ class SpacyTagger(TaggerI):
         # now doc is ready:
         return [(t.text, t.tag_) for t in doc]
 
-save_name = sys.argv[1]
+# save_name = sys.argv[1]
 
 train_data = treebank.tagged_sents()[:3000]
 test_data = treebank.tagged_sents()[3000:]
