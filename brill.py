@@ -11,4 +11,4 @@ train_data = treebank.tagged_sents()[:3000]
 brill_tagger = trainer.train(train_data)
 
 test_data = treebank.tagged_sents()[3000:]
-brill_tagger.evaluate(test_data)
+print(brill_tagger.evaluate(test_data))
