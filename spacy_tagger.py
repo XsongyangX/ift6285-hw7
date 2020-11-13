@@ -1,5 +1,5 @@
 import sys
-from nltk.tag.brill import BrillTagger, brill, brill24
+from nltk.tag.brill import BrillTagger, Template, brill24
 import spacy
 from nltk.tag import TaggerI
 from nltk.corpus import treebank
@@ -41,7 +41,7 @@ test_data = treebank.tagged_sents()[3000:]
 recursive_tagger : BrillTagger = None
 
 # Clean up templates
-brill.Template._cleartemplates()
+Template._cleartemplates()
 templates = brill24()
 
 for i in range(sys.argv[1]):
