@@ -11,6 +11,7 @@ test_data = treebank.tagged_sents()[3000:]
 from nltk.tag.brill import BrillTagger
 from pickle import load
 
-tagger : BrillTagger = load(open(save_name, "rb"))
+encoded = load(open(save_name, "rb"))
+brill_tagger = BrillTagger.decode_json_obj(encoded)
 
-print(tagger.evaluate(test_data))
+print(brill_tagger.evaluate(test_data))

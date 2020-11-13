@@ -44,10 +44,10 @@ save_name = sys.argv[1]
 # ]
 crf = CRFTagger()
 crf.set_model_file("crf.model")
-trainer = BrillTaggerTrainer(crf, [brill.Template(brill.Pos([-1]))])
+trainer = BrillTaggerTrainer(crf, brill24())
 
 train_data = treebank.tagged_sents()[:3000]
 brill_tagger = trainer.train(train_data)
 
 import pickle
-pickle.dump(brill_tagger, open(save_name, "wb"))
+pickle.dump(brill_tagger.encode_json_obj(), open(save_name, "wb"))
