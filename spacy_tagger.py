@@ -7,15 +7,16 @@ from nltk.tag.brill_trainer import BrillTaggerTrainer
 import time
 start_time = time.time()
 
+
 class SpacyTagger(TaggerI):
-    
+
     def __init__(self):
         """
         Creates a spacy instance
         """
-        model = "en_core_web_sm" # try also the _lg one
+        model = "en_core_web_sm"  # try also the _lg one
         self.nlp = spacy.load(model,
-            disable=["parser", "ner"]) # to go faster
+                              disable=["parser", "ner"])  # to go faster
 
     def tag(self, tokens):
         """
@@ -35,21 +36,22 @@ class SpacyTagger(TaggerI):
 
 # save_name = sys.argv[1]
 
+
 train_data = treebank.tagged_sents()[:3000]
 test_data = treebank.tagged_sents()[3000:]
 
-recursive_tagger : BrillTagger = None
+recursive_tagger: BrillTagger = None
 
 # Clean up templates
 Template._cleartemplates()
 templates = brill24()
 
 for i in range(int(sys.argv[1])):
-  if i == 0:
-    trainer = BrillTaggerTrainer(SpacyTagger(), templates)
-  else:
-    trainer = BrillTaggerTrainer(recursive_tagger, templates)
-  recursive_tagger = trainer.train(train_data)
-  print(f"Iteration {i+1}, time elapsed: {time.time() - start_time}")
-  print(f"Train score: {recursive_tagger.evaluate(train_data)}")
-  print(f"Test score: {recursive_tagger.evaluate(test_data)}")
+    if i == 0:
+        trainer = BrillTaggerTrainer(SpacyTagger(), templates)
+    else:
+        trainer = BrillTaggerTrainer(recursive_tagger, templates)
+    recursive_tagger = trainer.train(train_data)
+    print(f"Iteration {i+1}, time elapsed: {time.time() - start_time}")
+    print(f"Train score: {recursive_tagger.evaluate(train_data)}")
+    print(f"Test score: {recursive_tagger.evaluate(test_data)}")
